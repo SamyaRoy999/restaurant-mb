@@ -1,27 +1,22 @@
-import { useEffect, useState } from "react"
+
 import SectionHeading from "../SectionHeading/SectionHeading"
 import MenuItem from "../../sheard/MenuItem/MenuItem"
 
+import useMenu from "../../../hooks/useMenu"
+
 
 const PopulerMenu = () => {
+    
+    const [menu] = useMenu()
+    const populer = menu.filter(item => (
+        item.category === "popular"
+    ))
 
-    const [menu, setMenu] = useState([])
-
-    useEffect(() => {
-        fetch("menu.json")
-        .then(res=> res.json())
-        .then(data=> {
-            const populerItem = data.filter(item => item.category === "popular")
-            setMenu(populerItem)
-        })
-
-    }, [])
-    console.log(menu);
     return (
         <div>
             <SectionHeading heading='FROM OUR MENU ' subHeading='---Check it out---' />
-            <div>
-                {menu.map(item => <MenuItem key={item._id} item={item}/>)}
+            <div className=" grid gap-8 grid-cols-1 mb-10 md:grid-cols-2">
+                {populer.map(item => <MenuItem key={item._id} item={item}/>)}
             </div>
         </div>
     )

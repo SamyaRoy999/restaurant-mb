@@ -5,6 +5,7 @@ import {
 
 import Home from "../Pages/Home/Home";
 import Layout from "../Layout/Layout";
+import OurMenu from "../Pages/OurMenu/OurMenu";
 
 
 
@@ -16,7 +17,11 @@ import Layout from "../Layout/Layout";
         {
             path: '/',
             element: <Home/>
-        }
+        },
+        {
+            path: '/menu',
+            element: <OurMenu/>
+        },
       ]
     },
   ]);
