@@ -11,6 +11,7 @@ import soupimg from '../../assets/menu/soup-bg.jpg'
 import saladimg from '../../assets/menu/salad-bg.jpg'
 import pizzaimg from '../../assets/menu/pizza-bg.jpg'
 
+
 const OurMenu = () => {
     const [menu] = useMenu()
     const offereds = menu.filter(item => item.category === "offered")
@@ -31,20 +32,17 @@ const OurMenu = () => {
             <Manu item={offereds} />
 
             {/* DESSERTS */}
-            <Cover img={dessertimg} title="DESSERTS " des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
-            <Manu item={desserts} />
+          
+            <Manu item={desserts} img={dessertimg} title="dessert"  des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
             {/* PIZZA */}
-            <Cover img={pizzaimg} title="PIZZA " des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
-            <Manu item={pizzas} />
+            <Manu item={pizzas}  img={pizzaimg} title="pizza " des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."/>
 
-            {/* SALADS*/}
-            <Cover img={saladimg} title="SALADS" des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
-            <Manu item={salads} />
-
+            {/* salads*/}
+            <Manu item={salads} img={saladimg} title="salad" des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."/>
+            
             {/* SOUPS*/}
-            <Cover img={soupimg} title="SOUPS" des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
-            <Manu item={soups} />
+            <Manu item={soups} img={soupimg} title="soup"  des="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."/>
         </div>
     )
 }

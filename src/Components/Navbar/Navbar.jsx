@@ -1,11 +1,29 @@
+
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../Providers/AuthProvider"
+
+
 
 
 const Navbar = () => {
-    const NavbarUl = <>
+
+    const { user, signOutUser  } = useContext(AuthContext);
+
+    const hendelLogout = () => {
+        signOutUser() 
+    }
+
+    const NavbarUl = <div className=" flex justify-center items-center cursor-pointer">
         <li><Link to='/'>HOME</Link></li>
         <li><Link to='/menu'>OUR MENU</Link></li>
-    </>
+        <li><Link to='/ourShop/salad'>OUR SHOP</Link></li>
+        {user ?
+            <li onClick={hendelLogout}>LOGOUT</li>
+            :
+            <li><Link to='/login'>Login</Link></li>
+        }
+    </div>
     return (
         <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl mx-auto text-white bg-black ">
             <div className="navbar-start">
@@ -14,14 +32,14 @@ const Navbar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm  text-white dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                      {NavbarUl}
+                        {NavbarUl}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">BISTRO BOSS</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 text-white">
-                {NavbarUl}
+                    {NavbarUl}
                 </ul>
             </div>
             <div className="navbar-end">
