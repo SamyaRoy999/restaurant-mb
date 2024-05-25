@@ -21,7 +21,7 @@ const Navbar = () => {
         <li><Link to='/ourShop/salad'>OUR SHOP</Link></li>
         <li><Link to='/secrat'>secrat</Link></li>
         <li>
-            <Link to='/'> <MdShoppingCart className=" text-2xl"></MdShoppingCart> <div className="badge  badge-secondary">+{cart.length}</div></Link>
+            <Link to='deshboard/cart'> <MdShoppingCart className=" text-2xl"></MdShoppingCart> <div className="badge  badge-secondary">+{cart.length}</div></Link>
         </li>
 
         {user ?
