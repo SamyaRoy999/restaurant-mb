@@ -2,22 +2,28 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../Providers/AuthProvider"
-
+import { MdShoppingCart } from "react-icons/md";
+import useCarts from "../../../hooks/useCarts";
 
 
 
 const Navbar = () => {
 
-    const { user, signOutUser  } = useContext(AuthContext);
-
+    const { user, signOutUser } = useContext(AuthContext);
+    const [cart] = useCarts()
     const hendelLogout = () => {
-        signOutUser() 
+        signOutUser()
     }
 
     const NavbarUl = <div className=" flex justify-center items-center cursor-pointer">
         <li><Link to='/'>HOME</Link></li>
         <li><Link to='/menu'>OUR MENU</Link></li>
         <li><Link to='/ourShop/salad'>OUR SHOP</Link></li>
+        <li><Link to='/secrat'>secrat</Link></li>
+        <li>
+            <Link to='/'> <MdShoppingCart className=" text-2xl"></MdShoppingCart> <div className="badge  badge-secondary">+{cart.length}</div></Link>
+        </li>
+
         {user ?
             <li onClick={hendelLogout}>LOGOUT</li>
             :

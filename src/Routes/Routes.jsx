@@ -9,6 +9,8 @@ import OurMenu from "../Pages/OurMenu/OurMenu";
 import OurShop from "../Pages/OurShop/OurShop";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
+import Secrat from "../Pages/Secrat/Secrat";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -36,6 +38,10 @@ import Signup from "../Pages/Signup/Signup";
         {
             path: '/signup',
             element: <Signup/>
+        },
+        {
+            path: '/secrat',
+            element: <PrivateRoute><Secrat/></PrivateRoute> 
         },
       ]
     },

@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from 'sweetalert2'
 
 const Signup = () => {
 
     const {createUser} = useContext(AuthContext)
+    const navigate = useNavigate()
+ 
+
+    
+
     const {
         register,
         handleSubmit,
@@ -17,8 +23,24 @@ const Signup = () => {
         const password = data.password 
         console.log(name, email, password);
         createUser(email,password)
-      }
+        .then(result => {
+            const user = result.user
+                if (user) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Singup successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
 
+                setTimeout(() => {
+                    navigate("/")
+                }, 2000);
+            })
+      }
+        
     return (
         <div className="flex min-h-screen items-center justify-center">
             <div className="relative h-[800px] w-full overflow-hidden ">
