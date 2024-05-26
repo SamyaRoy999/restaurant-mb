@@ -3,13 +3,14 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../Providers/AuthProvider"
 import { MdShoppingCart } from "react-icons/md";
-import useCarts from "../../../hooks/useCarts";
+import useCarts from "../../hooks/useCarts";
+
 
 
 
 const Navbar = () => {
 
-    const { user, signOutUser } = useContext(AuthContext);
+    const { user, signOutUser} = useContext(AuthContext);
     const [cart] = useCarts()
     const hendelLogout = () => {
         signOutUser()
@@ -49,7 +50,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {user && <a className="btn">{user.email}</a>}
+                
             </div>
         </div>
     )

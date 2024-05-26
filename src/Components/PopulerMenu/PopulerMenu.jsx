@@ -1,8 +1,9 @@
 
 import SectionHeading from "../SectionHeading/SectionHeading"
 import MenuItem from "../../sheard/MenuItem/MenuItem"
+import useMenu from "../../hooks/useMenu"
 
-import useMenu from "../../../hooks/useMenu"
+
 
 
 const PopulerMenu = () => {

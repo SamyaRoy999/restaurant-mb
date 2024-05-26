@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Cover from '../../sheard/Cover/Cover';
 import img from '../../assets/menu/banner3.jpg'
 import Manu from '../../Components/Menu/Manu';
-import useMenu from '../../../hooks/useMenu';
+import useMenu from '../../hooks/useMenu';
 import SectionHeading from '../../Components/SectionHeading/SectionHeading';
 
 import dessertimg from '../../assets/menu/dessert-bg.jpeg'
