@@ -53,25 +53,35 @@ const Signup = () => {
                 }, 2000);
             })
     }
-    const hendelGoogleSingUp =()=>{
+    const hendelGoogleSingUp = () => {
         googleSingIn()
-        .then(result => {
-            const user = result.user
-            if (user) {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Login successfull",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
+            .then(result => {
+                const user = result.user
+                if (user) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Login successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                }
+                axiosPublice.post('/user', userInfo)
+                    .then(res => {
+                        if (res.data) {
+                            console.log("user added database");
+                        }
+                    })
 
-            setTimeout(() => {
-                navigate('/')
-            }, 2000);
-        })
-    } 
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
+            })
+    }
 
     return (
         <div className="flex min-h-screen items-center justify-center">

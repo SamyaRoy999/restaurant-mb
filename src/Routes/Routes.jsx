@@ -13,6 +13,13 @@ import Secrat from "../Pages/Secrat/Secrat";
 import PrivateRoute from "./PrivateRoute";
 import Deshboard from "../Layout/Deshboard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
+import AllUser from "../Pages/AllUser/AllUser";
+import AddItems from "../Pages/Deshboard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
+import ManegeItem from "../Pages/Deshboard/ManegeItem/ManegeItem";
+import Payment from "../Pages/Deshboard/Payment/Payment";
+
+
 
 
 
@@ -48,13 +55,33 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: 'deshboard/cart',
-    element: <Deshboard />,
+    path: 'deshboard',
+    element: <PrivateRoute><Deshboard /></PrivateRoute>,
     children: [
       {
         path: 'cart',
         element: <Cart />
       },
+      {
+        path: 'payment',
+        element: <Payment />
+      },
+
+      // admin user
+
+      {
+        path: 'addItems',
+        element: <AdminRoute> <AddItems /> </AdminRoute>
+      },
+      {
+        path: 'manageItems',
+        element: <AdminRoute> <ManegeItem /> </AdminRoute>
+      },
+
+      {
+        path: 'user',
+        element: <AdminRoute><AllUser /></AdminRoute>
+      }
     ]
   }
 ]);

@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react"
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
+import useAxiosPublicSecour from "../hooks/useAxiosPublicSecour";
 
 
 
@@ -14,14 +15,14 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    const axiosPiublic = useAxiosPublicSecour()
 
     // Create User
     const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
-
+    
     // Sign In User
 
     const signInUser = (email, password) => {
@@ -31,7 +32,7 @@ const AuthProvider = ({ children }) => {
 
     // google sing in
 
-    const googleSingIn = () =>{
+    const googleSingIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
@@ -58,12 +59,23 @@ const AuthProvider = ({ children }) => {
         const unsubcribe = onAuthStateChanged(auth, (creantUser) => {
             setUser(creantUser)
             console.log("get user", creantUser);
+            if (creantUser) {
+                const userInfo = { email: creantUser.email }
+                axiosPiublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
+            } else {
+                localStorage.removeItem('access-token');
+            }
             setLoading(false)
         });
         return () => {
             return unsubcribe()
         }
-    }, [])
+    }, [axiosPiublic])
 
 
 
@@ -75,8 +87,8 @@ const AuthProvider = ({ children }) => {
         signOutUser,
         updataProfile,
         googleSingIn,
-        
-        
+
+
     }
 
     return (

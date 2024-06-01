@@ -3,14 +3,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { AuthContext } from '../../Providers/AuthProvider';
 
 import Swal from 'sweetalert2'
+import useAxiosPublicSecour from '../../hooks/useAxiosPublicSecour';
 
 const Login = () => {
 
 
-    const { signInUser, googleSingIn} = useContext(AuthContext)
+    const { signInUser, googleSingIn } = useContext(AuthContext)
 
     const navigate = useNavigate()
     const location = useLocation()
+
+    const useAxiosPublic = useAxiosPublicSecour()
 
     const from = location.state?.from.pathname || '/';
 
@@ -23,6 +26,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 const user = result.user
+                console.log(user);
                 if (user) {
                     Swal.fire({
                         position: "center",
@@ -38,25 +42,35 @@ const Login = () => {
                 }, 2000);
             })
     }
-    const hendelGoogleSingUp =()=>{
+    const hendelGoogleSingUp = () => {
         googleSingIn()
-        .then(result => {
-            const user = result.user
-            if (user) {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Login successfull",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
+            .then(result => {
+                const user = result.user
+                if (user) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Login successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                }
+                useAxiosPublic.post('/user', userInfo)
+                    .then(res => {
+                        if (res.data) {
+                            console.log("user added database");
+                        }
+                    })
 
-            setTimeout(() => {
-                navigate(from, { replace: true })
-            }, 2000);
-        })
-    } 
+                setTimeout(() => {
+                    navigate(from, { replace: true })
+                }, 2000);
+            })
+    }
 
     return (
 
@@ -96,7 +110,7 @@ const Login = () => {
 
                     <a onClick={hendelGoogleSingUp} className="border-white-500 group m-auto my-0 inline-flex h-12 w-[320px] items-center justify-center space-x-2 rounded-3xl border px-4 py-2 transition-colors duration-300 hover:border-black hover:bg-black focus:outline-none">
                         <span>
-                        <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+                            <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
                         </span>
                         <span className="text-sm font-medium text-white">Google</span>
                     </a>
